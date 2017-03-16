@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function foo1() {
+            console.log("foo3 is execute");
+        }
+
+        function foo2() {
+            console.log("foo4 is execute");
+        }
+        var ev = document.createEvent('HTMLEvents');
+        ev.initEvent('fakeEvent', false, false);
+        document.addEventListener("fakeEvent", foo1, false);
+        document.addEventListener("fakeEvent", foo2, false);
+    </script>
+    <script>
+        var idChange = function () {
+            var id = 1;
+            return {
+                getId: function () {
+                    return id;
+                },
+                setId: function (a) {
+                    id = a;
+                    document.dispatchEvent(ev);
+                }
+            }
+        }();
+        // document.dispatchEvent(ev);
+        // idChange.setId(2)
+    </script>
+</body>
+
+</html>
